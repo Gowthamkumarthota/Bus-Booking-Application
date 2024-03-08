@@ -3,7 +3,10 @@ import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Fade from 'react-reveal/Fade';
+
+import Travel from './BookInterface.js'
 
 import image1 from './image1.jpg';
 import image2 from './image2.jpg';
@@ -17,7 +20,10 @@ import image9 from './image9.jpg';
 import image10 from './image10.jpg';
 import image11 from './image11.jpg';
 
-import backgroundImage from './morning.jpg'; // Replace 'your-image-file.jpg' with the actual file path
+import backgroundImage from './morning.jpg';
+
+
+
 
 const Home = () => {
   const bodyStyle = {
@@ -30,12 +36,14 @@ const Home = () => {
     justifyContent: 'center',
     height: '100px',
   };
+
   const imageStyle = {
     width: '305px', // Adjust the width of the image
     height: '180px', // Adjust the height of the image
     borderRadius: '8px', // Add border radius for rounded corners
   };
-const marqueeStyle = {
+
+  const marqueeStyle = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -43,6 +51,7 @@ const marqueeStyle = {
     color: '#ffffff',
     marginTop: '10px',
   };
+
   const marqueeContainerStyle = {
     display: 'flex',
     gap: '10px', // Adjust the space between images
@@ -90,9 +99,10 @@ const marqueeStyle = {
 
   const [fromStation, setFromStation] = useState('');
   const [toStation, setToStation] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  const fromStationSuggestions = ['Hyderabad', 'Vskp', 'Vzm'];
-  const toStationSuggestions = ['Vzm', 'Vskp', 'Guntur'];
+  const fromStationSuggestions = ['Hyderabad', 'Vishakhapatnam', 'Vizianagaram'];
+  const toStationSuggestions = ['Vizianagaram', 'Vishakhapatnam', 'Guntur','Hyderabad'];
 
   const handleFromStationChange = (event) => {
     setFromStation(event.target.value);
@@ -119,6 +129,14 @@ const marqueeStyle = {
     padding: '20px',
     borderRadius: '8px',
     marginBottom: '15px',
+    margin: 'auto',
+    maxWidth: '80%',
+  };
+
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate('/Travel', { state: { fromStation, toStation, selectedDate } });
   };
 
   return (
@@ -131,8 +149,8 @@ const marqueeStyle = {
           <br></br>
           <br></br>
           <h1>Book tickets here :!</h1>
-          <div style={containerStyle}>
-            <div style={{ position: 'relative' }}>
+        <div style={containerStyle}>
+          <div style={{ position: 'relative' }}>
               <div style={inputStyle}>
                 <DirectionsBusIcon style={{ marginRight: '5px' }} />
                 <input
@@ -163,24 +181,24 @@ const marqueeStyle = {
                   list="toStationSuggestions"
                 />
               </div>
-              <datalist style={{ ...dropdownStyle, top: 'calc(100% + 10px)' }} id="toStationSuggestions">
+<datalist style={{ ...dropdownStyle, top: 'calc(100% + 10px)' }} id="toStationSuggestions">
                 {toStationSuggestions.map((suggest, index) => (
                   <option key={index} value={suggest} />
                 ))}
               </datalist>
             </div>&nbsp;&nbsp;
-
-            <input type="date" style={inputStyle} />&nbsp;&nbsp;
-
-            <button style={buttonStyle}>
-              <Link to="/Login" style={{ color: 'white', textDecoration: 'none' }}>
-                Search
-              </Link>
-            </button>
-          </div>
+          <input
+            type="date"
+            style={inputStyle}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+          &nbsp;&nbsp;
+          <button style={buttonStyle} onClick={handleSearch}>
+            Search
+          </button>
+        </div>
         </center>
       </div>
-
       <div style={marqueeStyle}>
             <marquee>
             <div style={marqueeContainerStyle}>
@@ -201,107 +219,109 @@ const marqueeStyle = {
 
         
       
-      <center>
-        <Card style={{ backgroundColor: '#ffe9ce', width: '1500px', marginTop: '20px' }}>
-          <CardContent>
-            <div className="paragraph-container" style={paragraphContainerStyle}>
-              <h2 style={{ textAlign: 'left' }}>Online Bus Booking Services:</h2>
-              <p style={{ textAlign: 'left' }}>
-                <b>Bus Dejavu</b> is India's top online bus ticket booking company. Check out our budget-friendly offerings and use discount coupons to book bus tickets at the lowest possible price. You may look up bus schedules, compare fares, and get all the information you need to arrange an optimal and comfortable bus trip.
+        <center>
+        <Fade bottom>
+          <Card style={{ backgroundColor: '#f0f0f0', width: '80%', marginTop: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '15px' }}>
+            <CardContent>
+              <div className="paragraph-container" style={paragraphContainerStyle}>
+                <h2 style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: '#333', marginBottom: '20px' }}>Online Bus Booking Services:</h2>
+                <p style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '16px', color: '#666' }}>
+                  <b>Bus Dejavu</b> is India's top online bus ticket booking company. Check out our budget-friendly offerings and use discount coupons to book bus tickets at the lowest possible price. You may look up bus schedules, compare fares, and get all the information you need to arrange an optimal and comfortable bus trip.
 
-                <br></br>Bus Dejavu has made it easier to book buses online for your travel needs.<br></br> If you need to cancel your ticket or change the dates, you can save time and money by using DejavuCash as a refund option, which can be used immediately.<br></br> Book now!!!
+                  <br></br>Bus Dejavu has made it easier to book buses online for your travel needs.<br></br> If you need to cancel your ticket or change the dates, you can save time and money by using DejavuCash as a refund option, which can be used immediately.<br></br> Book now!!!
 
-                Browse through all of your bus route possibilities and use our unique smart filters to ensure a dependable and comfortable ride tailored to your schedule.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </center>
+                  Browse through all of your bus route possibilities and use our unique smart filters to ensure a dependable and comfortable ride tailored to your schedule.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </Fade>
 
-      <center>
-        <Card style={{ backgroundColor: '#ffe9ce', width: '1500px', marginTop: '20px' }}>
-          <CardContent>
-            <div className="paragraph-container" style={paragraphContainerStyle}>
-              <h2 style={{ textAlign: 'left' }}>Online Bus Ticket Booking at Lowest Price:</h2>
-              <p style={{ textAlign: 'left' }}>
-                Bus Dejavu allows travellers to book bus tickets online at the lowest ticket prices. Online bus booking allows travellers to select their preferred bus. AbhiBus is the best location to book bus tickets because it offers a large selection of private buses as well as SRTC (State Road Transport Corporation) buses for online booking.
-                The following buses are available for booking on AbhiBus at the lowest fare:
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <div>
-                    <ul>
-                      <li>AC Buses</li>
-                      <li>Non AC Buses</li>
-                      <li>Ordinary Buses</li>
-                      <li>Mini Buses</li>
-                      <li>Super Luxury (Non-AC Seater)</li>
-                    </ul>
+        <Fade bottom>
+          <Card style={{ backgroundColor: '#f0f0f0', width: '80%', marginTop: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '15px' }}>
+            <CardContent>
+              <div className="paragraph-container" style={paragraphContainerStyle}>
+                <h2 style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: '#333', marginBottom: '20px' }}>Online Bus Ticket Booking at Lowest Price:</h2>
+                <p style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '16px', color: '#666' }}>
+                  Bus Dejavu allows travellers to book bus tickets online at the lowest ticket prices. Online bus booking allows travellers to select their preferred bus. AbhiBus is the best location to book bus tickets because it offers a large selection of private buses as well as SRTC (State Road Transport Corporation) buses for online booking.
+                  The following buses are available for booking on AbhiBus at the lowest fare:
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>
+                      <ul>
+                        <li>AC Buses</li>
+                        <li>Non AC Buses</li>
+                        <li>Ordinary Buses</li>
+                        <li>Mini Buses</li>
+                        <li>Super Luxury (Non-AC Seater)</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul>
+                        <li>Volvo AC Buses</li>
+                        <li>Sleeper AC Buses</li>
+                        <li>Sleeper Buses</li>
+                        <li>Deluxe Buses</li>
+                        <li>Sleeper Cum Seater AC</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul>
+                        <li>Double Decker Buses</li>
+                        <li>Mercedes buses</li>
+                        <li>Non-Mercedes buses</li>
+                        <li>Electric Buses</li>
+                        <li>Express Buses</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div>
-                    <ul>
-                      <li>Volvo AC Buses</li>
-                      <li>Sleeper AC Buses</li>
-                      <li>Sleeper Buses</li>
-                      <li>Deluxe Buses</li>
-                      <li>Sleeper Cum Seater AC</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <ul>
-                      <li>Double Decker Buses</li>
-                      <li>Mercedes buses</li>
-                      <li>Non-Mercedes buses</li>
-                      <li>Electric Buses</li>
-                      <li>Express Buses</li>
-                    </ul>
-                  </div>
-                </div>
-                The bus ticket rate is determined by several criteria, including the type of bus, the bus operator, the distance between the origin and destination cities, the amenities provided by the bus operator, and the fact that bus operators may adjust ticket pricing during the holiday season. When compared to other forms of transportation, using the bus is the best, most cost-effective, and convenient option.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </center>
+                  The bus ticket rate is determined by several criteria, including the type of bus, the bus operator, the distance between the origin and destination cities, the amenities provided by the bus operator, and the fact that bus operators may adjust ticket pricing during the holiday season. When compared to other forms of transportation, using the bus is the best, most cost-effective, and convenient option.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </Fade>
 
-      <center>
-        <Card style={{ backgroundColor: '#ffe9ce', width: '1500px', marginTop: '20px' }}>
-          <CardContent>
-            <div className="paragraph-container" style={paragraphContainerStyle}>
-              <h2 style={{ textAlign: 'left' }}>Benefits of Booking Bus Tickets Online:</h2>
-              <p style={{ textAlign: 'left' }}>
-                In this day and age of technology, offline bus ticket buying is no longer encouraged. Online ticket booking is simple, quick, and hassle-free. AbhiBus meets all three requirements with its user-friendly app and website navigation.
+        <Fade bottom>
+          <Card style={{ backgroundColor: '#f0f0f0', width: '80%', marginTop: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '15px' }}>
+            <CardContent>
+              <div className="paragraph-container" style={paragraphContainerStyle}>
+                <h2 style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '24px', color: '#333', marginBottom: '20px' }}>Benefits of Booking Bus Tickets Online:</h2>
+                <p style={{ textAlign: 'left', fontFamily: 'Arial, sans-serif', fontSize: '16px', color: '#666' }}>
+                  In this day and age of technology, offline bus ticket buying is no longer encouraged. Online ticket booking is simple, quick, and hassle-free. AbhiBus meets all three requirements with its user-friendly app and website navigation.
 
-                Booking bus tickets online with AbhiBus has alleviated many of the obstacles that consumers face while booking tickets at offline counters or through travel agencies. Download the AbhiBus App to enjoy the benefits of booking bus tickets online.
+                  Booking bus tickets online with AbhiBus has alleviated many of the obstacles that consumers face while booking tickets at offline counters or through travel agencies. Download the AbhiBus App to enjoy the benefits of booking bus tickets online.
 
-                Here is a summary of all the benefits of booking bus tickets online through AbhiBus.
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <div>
-                    <ul>
-                      <li>AC Buses</li>
-                      <li>Avoid standing in long queues at offline bus ticket counters.</li>
-                      <li>No more hassle of approaching travel agents.</li>
-                      <li>Choose from multiple bus services.</li>
-                    </ul>
+                  Here is a summary of all the benefits of booking bus tickets online through AbhiBus.
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div>
+                      <ul>
+                        <li>AC Buses</li>
+                        <li>Avoid standing in long queues at offline bus ticket counters.</li>
+                        <li>No more hassle of approaching travel agents.</li>
+                        <li>Choose from multiple bus services.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul>
+                        <li>Book both Private and SRTC bus tickets online</li>
+                        <li>Check bus ticket availability online.</li>
+                        <li>Get bus timings, ticket price, boarding & dropping point details online.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul>
+                        <li>Access to payment partner discounts and cashback offers.</li>
+                        <li>Free Cancellation - Get 100% refund if your plan changes and you cancel your ticket.</li>
+                        <li>24/7 customer support</li>
+                        <li>Each and every transaction is simple, safe and secure</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div>
-                    <ul>
-                      <li>Book both Private and SRTC bus tickets online</li>
-                      <li>Check bus ticket availability online.</li>
-                      <li>Get bus timings, ticket price, boarding & dropping point details online.</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <ul>
-                      <li>Access to payment partner discounts and cashback offers.</li>
-                      <li>Free Cancellation - Get 100% refund if your plan changes and you cancel your ticket.</li>
-                      <li>24/7 customer support</li>
-                      <li>Each and every transaction is simple, safe and secure</li>
-                    </ul>
-                  </div>
-                </div>
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </Fade>
       </center>
     </div>
   );

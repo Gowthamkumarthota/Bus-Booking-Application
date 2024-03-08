@@ -48,7 +48,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'white', borderBottom: '1px solid white' }}>
+    <AppBar position="static" sx={{ backgroundColor: 'white', borderBottom: '1px solid #e0e0e0', boxShadow: '0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -62,7 +62,7 @@ function Header() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
@@ -100,10 +100,22 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  {page.icon}
-                  <Typography textAlign="center" component={Link} to={`/${page.name.toLowerCase()}`}>
-                    {page.name}
-                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box
+                      sx={{
+                        animation: 'fadeInAnimation 0.5s ease-in-out',
+                        '@keyframes fadeInAnimation': {
+                          '0%': { opacity: 0 },
+                          '100%': { opacity: 1 },
+                        },
+                      }}
+                    >
+                      {page.icon}
+                    </Box>
+                    <Typography textAlign="center" component={Link} to={`/${page.name.toLowerCase()}`}>
+                      {page.name}
+                    </Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Menu>
@@ -120,7 +132,7 @@ function Header() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
@@ -133,9 +145,20 @@ function Header() {
                 onClick={handleCloseNavMenu}
                 component={Link}
                 to={`/${page.name.toLowerCase()}`}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'flex', alignItems: 'center' }}
               >
-                {page.icon} {page.name}
+                <Box
+                  sx={{
+                    animation: 'fadeInAnimation 0.5s ease-in-out',
+                    '@keyframes fadeInAnimation': {
+                      '0%': { opacity: 0 },
+                      '100%': { opacity: 1 },
+                    },
+                  }}
+                >
+                  {page.icon}
+                </Box>
+                {page.name}
               </Button>
             ))}
           </Box>
@@ -164,10 +187,22 @@ function Header() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting.name} onClick={handleCloseUserMenu}>
-                  {setting.icon}
-                  <Typography textAlign="center" component={Link} to={`/${setting.name.toLowerCase()}`}>
-                    {setting.name}
-                  </Typography>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box
+                      sx={{
+                        animation: 'fadeInAnimation 0.5s ease-in-out',
+                        '@keyframes fadeInAnimation': {
+                          '0%': { opacity: 0 },
+                          '100%': { opacity: 1 },
+                        },
+                      }}
+                    >
+                      {setting.icon}
+                    </Box>
+                    <Typography textAlign="center" component={Link} to={`/${setting.name.toLowerCase()}`}>
+                      {setting.name}
+                    </Typography>
+                  </Box>
                 </MenuItem>
               ))}
             </Menu>
