@@ -9,6 +9,8 @@ import Travel from './components/BookInterface'
 import Signup from './components/Signup';
 import BusAdd from './components/busAdd.js';
 import ContactUs from './components/ContactUs';
+import SeatVacancy from './components/SeatVacancy';
+
 
 
 
@@ -28,6 +30,8 @@ function App() {
     <Route path="/login" element={<Login/>} />
     <Route path="/signup" element={<Signup/>} />
     <Route path="/busAdd" element={<BusAdd/>} />
+    <Route path="/SeatVacancy" element={<SeatVacancy />} />
+
 
     </Routes>
     </div>

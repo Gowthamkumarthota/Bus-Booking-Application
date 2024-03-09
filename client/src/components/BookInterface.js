@@ -17,11 +17,16 @@ import Box from '@mui/material/Box';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { useLocation } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
-
-
+import SeatVacancy from './SeatVacancy';
 import backgroundImage from './morning.jpg';
 
+
 const BusCard = ({ bus }) => {
+  const navigate = useNavigate();
+
+  const handleShowSeats = () => {
+    navigate('/SeatVacancy', { state: { seatvacancy: bus.seatvacancy } });
+  };
   return (
     <Card
       sx={{
@@ -63,7 +68,7 @@ const BusCard = ({ bus }) => {
       </Box>
       <Box>
         <Typography variant="h6">₹{bus.price}</Typography>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={handleShowSeats}>
           Show Seats
         </Button>
         <Typography variant="body2" color="text.secondary">
