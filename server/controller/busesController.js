@@ -1,8 +1,9 @@
 // controllers/busesController.js
 
-const Buses = require('../models/buses');
 
-exports.createBus = async (req, res) => {
+import Buses from '../models/buses.js';
+
+export const createBus = async (req, res) => {
   try {
     const busData = req.body;
     const newBus = new Buses(busData);
@@ -13,7 +14,7 @@ exports.createBus = async (req, res) => {
   }
 };
 
-exports.getBuses = async (req, res) => {
+export const getBuses = async (req, res) => {
   try {
     const buses = await Buses.find({});
     res.json(buses);
@@ -22,7 +23,7 @@ exports.getBuses = async (req, res) => {
   }
 };
 
-exports.getBusById = async (req, res) => {
+export const getBusById = async (req, res) => {
   try {
     const busId = req.params.id;
     const bus = await Buses.findById(busId);
@@ -36,7 +37,7 @@ exports.getBusById = async (req, res) => {
   }
 };
 
-exports.updateBus = async (req, res) => {
+export const updateBus = async (req, res) => {
   try {
     const busId = req.params.id;
     const updatedData = req.body;
@@ -51,7 +52,7 @@ exports.updateBus = async (req, res) => {
   }
 };
 
-exports.deleteBus = async (req, res) => {
+export const deleteBus = async (req, res) => {
   try {
     const busId = req.params.id;
     const deletedBus = await Buses.findByIdAndDelete(busId);

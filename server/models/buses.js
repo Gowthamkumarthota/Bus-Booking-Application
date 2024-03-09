@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const BusesSchema = mongoose.Schema({
     ID:{
         type:String,
@@ -52,5 +52,5 @@ const BusesSchema = mongoose.Schema({
     
 
 })
-const busesModel = mongoose.model("Buses",BusesSchema)
-module.exports=busesModel
+const Buses = mongoose.model("Buses",BusesSchema)
+export default Buses;

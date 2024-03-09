@@ -6,19 +6,23 @@ import Tickets from './components/Tickets';
 import User from './components/User';
 import Login from './components/Login';
 import Travel from './components/BookInterface'
+import Signup from './components/Signup';
+
 
 
 
 function App() {
+  const user=localStorage.getItem("token")
   return (
     <div className="App">
       <Header></Header> 
       <Routes>  
-    <Route path="/home" element={<Home/>} /> 
+    <Route path="/Home" element={<Home/>} /> 
     <Route path="/Tickets" element={<Tickets/>} />
     <Route path="/Travel" element={<Travel/>} />
     <Route path="/User" element={<User/>} />
     <Route path="/login" element={<Login/>} />
+    <Route path="/signup" element={<Signup/>} />
     </Routes>
     </div>
   );

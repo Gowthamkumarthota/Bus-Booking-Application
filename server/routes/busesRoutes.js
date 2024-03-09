@@ -1,11 +1,14 @@
-const express = require('express');
+// routes/busesRoutes.js
+
+import express from 'express';
+import { createBus, getBuses, getBusById, updateBus, deleteBus } from '../controller/busesController.js';
+
 const router = express.Router();
-const busesController = require('../controller/busesController');
 
-router.post('/', busesController.createBus);
-router.get('/', busesController.getBuses);
-router.get('/:id', busesController.getBusById);
-router.put('/:id', busesController.updateBus);
-router.delete('/:id', busesController.deleteBus);
+router.post('/', createBus);
+router.get('/', getBuses);
+router.get('/:id', getBusById);
+router.put('/:id', updateBus);
+router.delete('/:id', deleteBus);
 
-module.exports = router;
+export default router;

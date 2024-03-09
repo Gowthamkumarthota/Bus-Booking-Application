@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,12 +9,13 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom'; // Updated import for Link and useNavigate
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import { AuthContext } from './AuthContext';
 
 const defaultTheme = createTheme();
 
@@ -23,16 +24,27 @@ export default function Login() {
     email: '',
     password: '',
   });
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const userObj = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({
-      email: credentials.email,
-      password: credentials.password,
-    });
-    navigate('/Home', { state: { credentials } });
+    try {
+      const response = await axios.post("http://localhost:3000/server/auth/signin", credentials); // Update the URL
+      const { token } = response.data;
+      console.log(token);
+      navigate('/home');
+      toast.success("Login successful");
+      userObj.login(token);
+      sessionStorage.setItem('accessToken', token);
+    } catch (error) {
+      console.error(error);
+      if (error.response && error.response.status === 401) {
+        toast.error("Invalid credentials or user is not active");
+      } else {
+        toast.error("Error logging in");
+      }
+    }
   };
 
   const handleInputChange = (e) => {
@@ -40,10 +52,6 @@ export default function Login() {
       ...credentials,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -82,17 +90,10 @@ export default function Login() {
               fullWidth
               name="password"
               label="Password"
-              type={showPassword ? 'text' : 'password'} // Toggle between text and password type
+              type="password"
               id="password"
               autoComplete="current-password"
               onChange={handleInputChange}
-              InputProps={{
-                endAdornment: (
-                  <Button onClick={togglePasswordVisibility} tabIndex={-1}>
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                  </Button>
-                ),
-              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -113,9 +114,9 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <RouterLink to="/signup" variant="body2"> {/* Updated to use RouterLink */}
                   {"Don't have an account? Sign Up"}
-                </Link>
+                </RouterLink>
               </Grid>
             </Grid>
           </Box>

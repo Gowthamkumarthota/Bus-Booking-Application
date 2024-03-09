@@ -359,7 +359,7 @@ const View = () => {
   useEffect(() => {
     const fetchBuses = async () => {
       try {
-        const response = await axios.get('http://localhost:3500/buses');
+        const response = await axios.get('http://localhost:3000/buses');
         const filteredBuses = response.data.filter(
           (bus) =>
             bus.boarding.toLowerCase().includes(fromStation.toLowerCase()) &&
