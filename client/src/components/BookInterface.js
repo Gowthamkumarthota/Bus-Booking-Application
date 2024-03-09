@@ -16,22 +16,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { useLocation } from 'react-router-dom';
-import DirectionsBusIcon from '@mui/icons-material/DirectionsBus';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link, useNavigate } from 'react-router-dom';
-import Fade from 'react-reveal/Fade';
 
-import image1 from './image1.jpg';
-import image2 from './image2.jpg';
-import image3 from './image3.jpg';
-import image4 from './image4.jpg';
-import image5 from './image5.jpg';
-import image6 from './image6.jpg';
-import image7 from './image7.jpg';
-import image8 from './image8.jpg';
-import image9 from './image9.jpg';
-import image10 from './image10.jpg';
-import image11 from './image11.jpg';
 
 import backgroundImage from './morning.jpg';
 

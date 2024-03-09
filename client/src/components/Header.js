@@ -18,6 +18,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import PersonIcon from '@mui/icons-material/Person';
 import IMG_7777 from './IMG_7777.JPG';
 import { Link } from 'react-router-dom';
+import SpeakerNotesIcon from '@mui/icons-material/SpeakerNotes';
 
 const pages = [
   { name: 'Home', icon: <HomeIcon /> },
@@ -25,6 +26,7 @@ const pages = [
   { name: 'Travel', icon: <DirectionsBusFilledIcon /> },
   { name: 'Contactus', icon: <ContactSupportIcon /> },
   { name: 'Login', icon: <PersonIcon /> },
+  { name: 'BusAdd', icon: <SpeakerNotesIcon /> },
 ];
 const settings = [{ name: 'User', icon: <Avatar alt="User" src={IMG_7777} /> }];
 

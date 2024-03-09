@@ -7,6 +7,9 @@ import User from './components/User';
 import Login from './components/Login';
 import Travel from './components/BookInterface'
 import Signup from './components/Signup';
+import BusAdd from './components/busAdd.js';
+import ContactUs from './components/ContactUs';
+
 
 
 
@@ -20,9 +23,12 @@ function App() {
     <Route path="/Home" element={<Home/>} /> 
     <Route path="/Tickets" element={<Tickets/>} />
     <Route path="/Travel" element={<Travel/>} />
+    <Route path="/ContactUs" element={<ContactUs/>} />
     <Route path="/User" element={<User/>} />
     <Route path="/login" element={<Login/>} />
     <Route path="/signup" element={<Signup/>} />
+    <Route path="/busAdd" element={<BusAdd/>} />
+
     </Routes>
     </div>
   );

@@ -42,7 +42,7 @@ const BusForm = () => {
 
     try {
       console.log(formData);
-      const response = await axios.post('http://localhost:3500/buses/', formData);
+      const response = await axios.post('http://localhost:3000/buses/', formData);
       console.log(response.data);
       setFormSubmitted(true);
     } catch (error) {

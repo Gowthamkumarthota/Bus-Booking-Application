@@ -24,7 +24,6 @@ import backgroundImage from './morning.jpg';
 
 
 
-
 const Home = () => {
   const bodyStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -125,12 +124,12 @@ const Home = () => {
 
   const paragraphContainerStyle = {
     width: '1400px',
-    border: '2px solid black',
+    border: '4px solid black',
     padding: '20px',
     borderRadius: '8px',
     marginBottom: '15px',
     margin: 'auto',
-    maxWidth: '80%',
+    maxWidth: '95%',
   };
 
   const navigate = useNavigate();
